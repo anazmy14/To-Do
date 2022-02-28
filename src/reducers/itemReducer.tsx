@@ -8,12 +8,11 @@ import {
 import { StateType, ItemActionType } from "../types/types";
 
 export default function itemReducer(state: StateType, action: ItemActionType) {
-  console.log(action);
   switch (action.type) {
     case ADD_ITEM:
       return {
         ...state,
-        items: [...state.items, action.payload],
+        items: [...state.items, { ...action.payload }],
       };
 
     case CHANGE_ITEM_COLUMN:
@@ -29,7 +28,7 @@ export default function itemReducer(state: StateType, action: ItemActionType) {
                   ...item.history,
                 ],
               }
-            : item
+            : { ...item }
         ),
       };
 
@@ -46,7 +45,7 @@ export default function itemReducer(state: StateType, action: ItemActionType) {
                   ...item.history,
                 ],
               }
-            : item
+            : { ...item }
         ),
       };
     case SWAP_ITEMS:
@@ -54,10 +53,10 @@ export default function itemReducer(state: StateType, action: ItemActionType) {
         ...state,
         items: state.items.map((item, index) => {
           if (index === action.payload.currentIndex)
-            return state.items[action.payload.indexToMove as any];
-          else if (action.payload.indexToMove === index)
-            return state.items[action.payload.currentIndex as any];
-          else return item;
+            return { ...state.items[action.payload.indexToMove] };
+          if (index === action.payload.indexToMove)
+            return { ...state.items[action.payload.currentIndex] };
+          return { ...item };
         }),
       };
 

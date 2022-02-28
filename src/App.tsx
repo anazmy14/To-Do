@@ -59,7 +59,7 @@ function App() {
         columnId: Object.keys(columns)[0],
         history: [`Created as "${content}"`],
         content,
-      })
+      } as ItemType )
     );
   };
 
