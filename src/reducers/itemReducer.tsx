@@ -3,10 +3,10 @@ import {
   REMOVE_ITEM,
   EDIT_ITEM,
   CHANGE_ITEM_COLUMN,
-} from "../actions/types";
-import { State, ItemsAction } from "../types/types";
+} from "../actions/actionTypes";
+import { StateType, ItemsActionType } from "../types/types";
 
-export default function itemReducer(state: State, action: ItemsAction) {
+export default function itemReducer(state: StateType, action: ItemsActionType) {
   switch (action.type) {
     case ADD_ITEM:
       return {
@@ -23,7 +23,7 @@ export default function itemReducer(state: State, action: ItemsAction) {
                 ...item,
                 ...action.payload,
                 history: [
-                  `moved to ${state.columns[action.payload.columnId].name}`,
+                  `Moved to ${state.columns[action.payload.columnId].name}`,
                   ...item.history,
                 ],
               }
@@ -40,7 +40,7 @@ export default function itemReducer(state: State, action: ItemsAction) {
                 ...item,
                 ...action.payload,
                 history: [
-                  `changed to "${action.payload.content}"`,
+                  `Changed to "${action.payload.content}"`,
                   ...item.history,
                 ],
               }

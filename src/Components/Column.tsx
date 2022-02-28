@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Column, State } from "../types/types";
+import { ColumnType, StateType } from "../types/types";
 import {
   Droppable,
   DroppableProvided,
@@ -10,11 +10,11 @@ import Card from "./Card";
 
 interface Props {
   id: string;
-  column: Column;
+  column: ColumnType;
 }
 
-const Col: React.FC<Props> = ({ id, column }) => {
-  const items = useSelector((state: State) =>
+const Column: React.FC<Props> = ({ id, column }) => {
+  const items = useSelector((state: StateType) =>
     state.items.filter((item) => item.columnId === id)
   );
   return (
@@ -44,4 +44,4 @@ const Col: React.FC<Props> = ({ id, column }) => {
   );
 };
 
-export default Col;
+export default Column;

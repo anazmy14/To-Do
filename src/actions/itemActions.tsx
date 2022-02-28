@@ -1,27 +1,27 @@
-import { ADD_ITEM, REMOVE_ITEM, EDIT_ITEM, CHANGE_ITEM_COLUMN } from "./types";
-import { Item } from "../types/types";
+import { ADD_ITEM, REMOVE_ITEM, EDIT_ITEM, CHANGE_ITEM_COLUMN } from "./actionTypes";
+import { ItemType } from "../types/types";
 
-export const addItem = (item: Item) => {
+export const addItem = (item: ItemType) => {
   return {
     type: ADD_ITEM,
     payload: item,
   };
 };
-export const changeItemColumn = (item: Item) => {
+export const changeItemColumn = (item: ItemType) => {
   return {
     type: CHANGE_ITEM_COLUMN,
     payload: item,
   };
 };
 
-export const editItem = (item: Item) => {
+export const editItem = (item: ItemType) => {
   return {
     type: EDIT_ITEM,
     payload: item,
   };
 };
 
-export const removeItem = (item: Item) => {
+export const removeItem = (item: ItemType) => {
   return {
     type: REMOVE_ITEM,
     payload: item,

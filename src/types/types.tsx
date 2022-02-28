@@ -1,25 +1,25 @@
-export interface State {
-  items: Array<Item>;
-  columns: Columns;
+export interface StateType {
+  items: Array<ItemType>;
+  columns: ColumnsType;
 }
 
-export interface Column {
+export interface ColumnType {
   name: string;
   order: number;
 }
 
-export interface Columns {
-  [key: string]: Column;
+export interface ColumnsType {
+  [key: string]: ColumnType;
 }
 
-export interface Item {
+export interface ItemType {
   id: string;
   history: Array<string>;
   content?: string;
   columnId: string;
 }
 
-export interface ItemsAction {
+export interface ItemsActionType {
   type: string;
-  payload: Item;
+  payload: ItemType;
 }

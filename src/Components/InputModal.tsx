@@ -26,6 +26,7 @@ const InputModal: React.FC<Props> = ({
   const handleSubmit = () => {
     onSubmit(textValue);
     handleClose();
+    setTextValue("")
   };
 
   return (
