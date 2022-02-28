@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { addItem, changeItemColumn, removeItem } from "./actions/itemActions";
+import { addItem, changeItemColumn, removeItem, swapItems } from "./actions/itemActions";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { StateType, ItemType } from "./types/types";
 import Col from "./Components/Column";
@@ -12,8 +12,6 @@ function App() {
   const columns = useSelector((state: StateType) => state.columns);
 
   const onDragEnd = (result: DropResult) => {
-    console.log(result);
-
     if (
       result.source &&
       !result.destination &&
@@ -44,6 +42,13 @@ function App() {
         } as ItemType)
       );
     } else {
+      dispatch(
+        swapItems({
+          id: result.draggableId,
+          currentIndex: source.index,
+          indexToMove: destination.index,
+        } as ItemType)
+      )
     }
   };
 

@@ -15,11 +15,13 @@ export interface ColumnsType {
 export interface ItemType {
   id: string;
   history: Array<string>;
-  content?: string;
   columnId: string;
+  content?: string;
+  currentIndex? : number
+  indexToMove? : number 
 }
 
-export interface ItemsActionType {
+export interface ItemActionType {
   type: string;
   payload: ItemType;
-}
+ }

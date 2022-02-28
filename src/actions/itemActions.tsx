@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM, EDIT_ITEM, CHANGE_ITEM_COLUMN } from "./actionTypes";
+import { ADD_ITEM, REMOVE_ITEM, EDIT_ITEM, SWAP_ITEMS ,CHANGE_ITEM_COLUMN } from "./actionTypes";
 import { ItemType } from "../types/types";
 
 export const addItem = (item: ItemType) => {
@@ -20,6 +20,14 @@ export const editItem = (item: ItemType) => {
     payload: item,
   };
 };
+
+export const swapItems = (item: ItemType) => {
+  return {
+    type: SWAP_ITEMS,
+    payload: item,
+  };
+};
+
 
 export const removeItem = (item: ItemType) => {
   return {
