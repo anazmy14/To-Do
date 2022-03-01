@@ -3,10 +3,10 @@ import { v4 as uuid } from "uuid";
 import { fireEvent, render, screen, cleanup } from "@testing-library/react";
 import { createStore, Store } from "redux";
 import { Provider } from "react-redux";
-import reducer from "./reducers/itemReducer";
-import {addItem} from "./actions/itemActions"
-import App from "./App";
-import { ItemType } from "./types/types";
+import reducer from "../reducers/itemReducer";
+import {addItem} from "../actions/itemActions"
+import App from "../App";
+import { ItemType } from "../types/types";
 const columns = {
   [uuid()]: {
     name: "To Do",
