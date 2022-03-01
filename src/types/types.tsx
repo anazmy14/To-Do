@@ -1,25 +1,25 @@
 export interface StateType {
-  items: Array<ItemType>;
-  columns: ColumnsType;
+  readonly items: Array<ItemType>;
+  readonly columns: ColumnsType;
 }
 
 export interface ColumnType {
-  name: string;
-  order: number;
+  readonly name: string;
+  readonly order: number;
 }
 
 export interface ColumnsType {
-  [key: string]: ColumnType;
+  readonly [key: string]: ColumnType;
 }
 
 export interface ItemType {
-  id: string;
-  history: Array<string>;
-  columnId: string;
-  content?: string;
+  readonly id: string;
+  readonly history: Array<string>;
+  readonly columnId: string;
+  readonly content?: string;
 }
 
 export interface ItemActionType {
-  type: string;
-  payload: ItemType;
- }
+  readonly type: string;
+  readonly payload: ItemType;
+}

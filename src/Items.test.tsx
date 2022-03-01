@@ -103,6 +103,9 @@ describe("move card", () => {
   it("moves from done to in progress", ()=>{
     moveItem(doneCol, inProgressCol, 2, 1)
   })
+  it("moves from in progress to to-do", ()=>{
+    moveItem(inProgressCol, toDoCol, 1, 1)
+  })
 
   it("doesn't move from to-do to done", ()=>{
     moveItem(toDoCol, doneCol, 0, 0)
