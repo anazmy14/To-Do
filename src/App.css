@@ -26,18 +26,18 @@ button {
 
 }
 
-.list {
+.droppoable {
     padding: 4px;
     width: 250px;
     min-height: 500px ;
     background: rgb(3, 48, 70);
   }
 
-.list-active{
+.droppoable-active{
   background: rgb(0, 119, 255);
 }
 
-.card {
+.draggable {
     display:  flex;
     flex-direction: column;
     justify-content: space-between;
@@ -46,7 +46,6 @@ button {
     min-height: 150px;  
     color: "white";
     background: rgb(15, 79, 109);
-    border-radius: 10px;
     font-size: 22px;
     cursor: pointer;
     border: solid 2px rgb(76, 101, 155);
@@ -55,4 +54,18 @@ button {
   margin: 30px 10px;
   font-size: 24px;
   color: white;
+}
+
+.dragged {
+  opacity: 0.5;
+}
+.dragged-over {
+  background: rgba(17, 18, 83, 0.2); 
+}
+
+.container {
+   display: flex;
+   justify-content: center;
+    height: 100%;
+
 }

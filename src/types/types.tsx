@@ -17,8 +17,6 @@ export interface ItemType {
   history: Array<string>;
   columnId: string;
   content?: string;
-  currentIndex : number
-  indexToMove: number 
 }
 
 export interface ItemActionType {
