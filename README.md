@@ -4,7 +4,7 @@
 ### Installation
 
 ```bash
-git clone git@github.com:taniarascia/takenote
+git clone git@github.com:anazmy14/To-Do.git
 cd To-Do
 npm i
 ```
