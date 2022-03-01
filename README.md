@@ -24,7 +24,7 @@ Run tests.
 
 ```bash
 # In one window, run the application
-npm run 
+npm start 
 
 # In another window, run the tests
 npm run test
