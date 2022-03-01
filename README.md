@@ -13,7 +13,7 @@ npm i
 
 
 ```bash
-npm run dev
+npm start
 ```
 
 Go to `localhost:3000` to view the app.
