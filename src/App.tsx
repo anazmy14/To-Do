@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { addItem, changeItemColumn, removeItem, swapItems } from "./actions/itemActions";
+import { addItem, changeItemColumn, removeItem } from "./actions/itemActions";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { StateType, ItemType } from "./types/types";
 import Col from "./Components/Column";
@@ -41,14 +41,6 @@ function App() {
           columnId: destination.droppableId,
         } as ItemType)
       );
-    } else {
-      dispatch(
-        swapItems({
-          id: result.draggableId,
-          currentIndex: source.index,
-          indexToMove: destination.index,
-        } as ItemType)
-      )
     }
   };
 
@@ -59,7 +51,7 @@ function App() {
         columnId: Object.keys(columns)[0],
         history: [`Created as "${content}"`],
         content,
-      } as ItemType )
+      } as ItemType)
     );
   };
 
