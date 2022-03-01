@@ -4,30 +4,17 @@ import { fireEvent, render, screen, cleanup } from "@testing-library/react";
 import { createStore, Store } from "redux";
 import { Provider } from "react-redux";
 import reducer from "../reducers/itemReducer";
-import {addItem} from "../actions/itemActions"
+import { addItem } from "../actions/itemActions";
 import App from "../App";
 import { ItemType } from "../types/types";
-const columns = {
-  [uuid()]: {
-    name: "To Do",
-    order: 1,
-  },
-  [uuid()]: {
-    name: "In Progress",
-    order: 2,
-  },
-  [uuid()]: {
-    name: "Done",
-    order: 3,
-  },
-};
+import { columns } from "../constants";
 
 const initialState = {
   columns: columns,
   items: [],
 };
 
-let store:Store; 
+let store: Store;
 const renderWithProvider = (Component: React.FC) => {
   store = createStore(reducer as any, initialState);
   return render(
@@ -36,7 +23,6 @@ const renderWithProvider = (Component: React.FC) => {
     </Provider>
   );
 };
-
 
 interface Data {
   itemId: string;
@@ -47,14 +33,20 @@ const transferData: Data = {
   itemId: "",
   columnOrder: "",
 };
-const moveItem = (from: HTMLElement, to: HTMLElement, currentColIndex:number, difference:number)=>{
+const moveItem = (
+  from: HTMLElement,
+  to: HTMLElement,
+  currentColIndex: number,
+  shouldMove: boolean
+) => {
   const mockdt = {
     setData: jest.fn(
       (key: keyof Data, data: string) => (transferData[key] = data)
     ),
     getData: jest.fn((key: keyof Data) => transferData[key]),
   };
-  const cardId = uuid()
+  const cardId = uuid();
+  const difference = shouldMove ? 1 : 0;
   store.dispatch(
     addItem({
       id: cardId,
@@ -69,17 +61,20 @@ const moveItem = (from: HTMLElement, to: HTMLElement, currentColIndex:number, di
   fireEvent.dragStart(card, { dataTransfer: mockdt });
   fireEvent.dragOver(to, { dataTransfer: mockdt });
   fireEvent.dragEnd(to, { dataTransfer: mockdt });
-  fireEvent.drop(to, { dataTransfer: mockdt });   
-  expect(currentColItemsCountBefore - from.childElementCount).toEqual(difference);
-  expect(
-    to.childElementCount - targetColItemsCountBefore).toEqual(difference);
-}
-
+  fireEvent.drop(to, { dataTransfer: mockdt });
+  expect(currentColItemsCountBefore - from.childElementCount).toEqual(
+    difference
+  );
+  expect(to.childElementCount - targetColItemsCountBefore).toEqual(difference);
+};
 
 describe("move card", () => {
-  let toDoCol: any;
-  let inProgressCol: any;
-  let doneCol: any;
+  let toDoCol: HTMLLIElement;
+  let inProgressCol: HTMLLIElement;
+  let doneCol: HTMLLIElement;
+  const toDoColIndex = 0;
+  const inProgressColIndex = 1;
+  const doneColIndex = 2;
 
   beforeEach(() => {
     renderWithProvider(App);
@@ -92,26 +87,26 @@ describe("move card", () => {
     cleanup();
   });
 
-  it("moves from to-do to in progress", ()=>{
-    moveItem(toDoCol, inProgressCol, 0, 1)
-  })
+  it("moves from to-do to in progress", () => {
+    moveItem(toDoCol, inProgressCol, toDoColIndex, true);
+  });
 
-  it("moves from in progress to done", ()=>{
-    moveItem(inProgressCol, doneCol, 1, 1)
-  })
+  it("moves from in progress to done", () => {
+    moveItem(inProgressCol, doneCol, inProgressColIndex, true);
+  });
 
-  it("moves from done to in progress", ()=>{
-    moveItem(doneCol, inProgressCol, 2, 1)
-  })
-  it("moves from in progress to to-do", ()=>{
-    moveItem(inProgressCol, toDoCol, 1, 1)
-  })
+  it("moves from done to in progress", () => {
+    moveItem(doneCol, inProgressCol, doneColIndex, true);
+  });
+  it("moves from in progress to to-do", () => {
+    moveItem(inProgressCol, toDoCol, inProgressColIndex, true);
+  });
 
-  it("doesn't move from to-do to done", ()=>{
-    moveItem(toDoCol, doneCol, 0, 0)
-  })
+  it("doesn't move from to-do to done", () => {
+    moveItem(toDoCol, doneCol, toDoColIndex, false);
+  });
 
-  it("doesn't move from done to to-do", ()=>{
-    moveItem(doneCol, toDoCol, 0, 0)
-  }) 
+  it("doesn't move from done to to-do", () => {
+    moveItem(doneCol, toDoCol, doneColIndex, false);
+  });
 });
