@@ -57,7 +57,7 @@ const InputModal: React.FC<Props> = ({
           <Button variant="danger" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="success" onClick={handleSubmit}  disabled={textValue.length < 1} >
+          <Button variant="success" onClick={handleSubmit}  disabled={textValue === initialTextValue} >
             Confirm
           </Button>
         </Modal.Footer>
